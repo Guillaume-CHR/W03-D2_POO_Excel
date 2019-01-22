@@ -24,7 +24,7 @@ def main # Create an instance of class 'Scrapper' with attribute array_town
   url = "http://annuaire-des-mairies.com/val-d-oise.html"
   scrapper = Scrapper.new(url)
   array_to_record = scrapper.array_town
-end
+end 
 
 def record(file) #For each sub-hash, the value is join with commas
   main.each do |_hash|
