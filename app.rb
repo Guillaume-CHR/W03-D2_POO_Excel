@@ -26,19 +26,10 @@ def main # Create an instance of class 'Scrapper' with attribute array_town
   array_to_record = scrapper.array_town
 end 
 
-def record(file) #For each sub-hash, the value is join with commas
-  main.each do |_hash|
-  	file.puts(_hash.map {|x,y| "#{x},#{y}"}.join(''))
+def save_as_JSON #Record email using format to_json (~ to_i)
+  File.open("db/email.json","w") do |f|
+    f.write(main.to_json)
   end
-end
-
-def save_as_JSON #Call method 'record' with file 'email.JSON'
-  record(File.open("db/email.JSON","w"))
-
-  #Alternative where text is in one row
-  # File.open("db/email.json","w") do |f|
-  #   f.write(main.to_json)
-  # end
 end
 
 def save_as_spreedsheet #Use Google Drive API to save in Google Drive
@@ -64,8 +55,11 @@ def save_as_spreedsheet #Use Google Drive API to save in Google Drive
   # ws save
 end
 
-def save_as_CSV #Call method 'record' with file 'email.csv'
-  record(File.open("db/email.csv","w"))
+def save_as_CSV #Record in format CSV
+  file = File.open("db/email.csv","w")
+  main.each do |_hash|
+    file.puts(_hash.map {|x,y| "#{x},#{y}"}.join(''))
+  end
 
   # Alternative
   # CSV.open("db/email.csv", "w") {|csv| main.to_a.each {|_array| csv << _array}}
@@ -90,23 +84,21 @@ def perform #User menu
     sleep(1)
     perform
   elsif choice == 1
-    puts "_nYou've selected format JSON - Great choice for unknown use"
-    puts "(... loading...)"
+    puts "\nYou've selected format JSON - Great choice for unknown use"
+    print "(... loading...)"
     save_as_JSON
-    system("cd db/email.JSON")
-    puts "(All set)"
+    puts "\nAll set"
   elsif choice == 2
-    puts "You've selected format Google Drive - Great choice to save the planet in Cloud"
-    puts "(... loading...)"
+    puts "\nYou've selected format Google Drive - Great choice to save the planet in Cloud"
+    print "(... loading...)"
     save_as_spreedsheet
-    puts "Access the hereafter link for checks: https://docs.google.com/spreadsheets/d/1Gc83X5sHlXEhKl4EZar1qdVqsJCpLC14ZrnQZAh9JO0/edit?usp=sharing"
-    puts "(All set)"
+    puts "\nAccess the hereafter link for checks: https://docs.google.com/spreadsheets/d/1Gc83X5sHlXEhKl4EZar1qdVqsJCpLC14ZrnQZAh9JO0/edit?usp=sharing"
+    puts "\nAll set"
   elsif choice == 3
-    puts "You've selected format CSV - Great choice, all you need is to convert it in Excel"
-    puts "(... loading...)"
+    puts "\nYou've selected format CSV - Great choice, all you need is to convert it in Excel"
+    print "(... loading...)"
     save_as_CSV
-    system("cd db/email.csv")
-    puts "(All set)"
+    puts "\nAll set"
   end
 end
 
