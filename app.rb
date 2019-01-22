@@ -26,6 +26,7 @@ def main # Create an instance of class 'Scrapper' with attribute array_town
   array_to_record = scrapper.array_town
 end 
 
+
 def record(file) #For each sub-hash, the value is join with commas
   main.each do |_hash|
   	file.puts(_hash.map {|x,y| "#{x},#{y}"}.join(''))
