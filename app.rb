@@ -34,6 +34,11 @@ end
 
 def save_as_JSON #Call method 'record' with file 'email.JSON'
   record(File.open("db/email.JSON","w"))
+
+  #Alternative where text is in one row
+  # File.open("db/email.json","w") do |f|
+  #   f.write(main.to_json)
+  # end
 end
 
 def save_as_spreedsheet #Use Google Drive API to save in Google Drive
@@ -51,10 +56,19 @@ def save_as_spreedsheet #Use Google Drive API to save in Google Drive
   end
   ws.save
   ws.reload
+
+  #Alternative
+  # session = GoogleDrive::Session.from_config("config.json")
+  # ws = session.spreadsheet_by_key("1Gc83X5sHlXEhKl4EZar1qdVqsJCpLC14ZrnQZAh9JO0").worksheets[0]
+  # puts ws.insert_rows(1, main)
+  # ws save
 end
 
 def save_as_CSV #Call method 'record' with file 'email.csv'
   record(File.open("db/email.csv","w"))
+
+  # Alternative
+  # CSV.open("db/email.csv", "w") {|csv| main.to_a.each {|_array| csv << _array}}
 end
 
 def perform #User menu
