@@ -26,22 +26,28 @@ def main
   array_to_record = scrapper.array_town
 end
 
-def save_as_JSON
-  json_file = File.open("db/email.JSON","w")
-  i=1
+def record(file)
   main.each do |_hash|
-  	json_file.puts(_hash.map {|x,y| "#{i},#{x},#{y}"}.join(''))
-  	i+=1
+  	file.puts(_hash.map {|x,y| "#{x},#{y}"}.join(''))
   end
 end
 
+def save_as_JSON
+  record(File.open("db/email.JSON","w"))
+end
+
+def save_as_spreedsheet
+  
+end
+
 def save_as_CSV
-	system("cp db/email.JSON db/email.csv")
+  record(File.open("db/email.csv","w"))
 end
 
 def perform
   #Implement user selection
   save_as_JSON
+
   save_as_CSV
 end
 
