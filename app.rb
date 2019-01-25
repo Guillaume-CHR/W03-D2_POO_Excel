@@ -4,27 +4,26 @@
 #****************************************************************************
 #   Ruby's Program - app
 #   Written by: Guillaume CHRISTE
-# 	Date: Date of modification
+#   Date: Date of modification
 #   
 #   Description:
-# 		- Calls the method 'scrapper' to retrieve an array of city/emails
-# 		- Convert this array into either JSON, Google Sheet or CSV
-# 		
-# 	Gems:
-  		require 'bundler'
-  		Bundler.require
+#     - Calls the method 'scrapper' to retrieve an array of city/emails
+#     - Convert this array into either JSON, Google Sheet or CSV
+#     
+#   Gems:
+      require 'bundler'
+      Bundler.require
 
-#	Links:
-		$:.unshift File.expand_path("./../lib", __FILE__)
-		require 'app/scrapper'
-		# require 'views/'
+# Links:
+    $:.unshift File.expand_path("./../lib", __FILE__)
+    require 'app/scrapper'
+    # require 'views/'
 #
 #****************************************************************************
 def main # Create an instance of class 'Scrapper' with attribute array_town
-puts page_mairie = Scrapper.new("http://annuaire-des-mairies.com/haute-garonne.html")
-puts page_mairie1 = Scrapper.new("http://annuaire-des-mairies.com/haute-garonne-2.html")
-puts page_mairie2 = Scrapper.new("http://annuaire-des-mairies.com/haute-garonne-3.html")
-
+  url = "http://annuaire-des-mairies.com/val-d-oise.html"
+  scrapper = Scrapper.new(url)
+  array_to_record = scrapper.array_town
 end 
 
 def save_as_JSON #Record email using format to_json (~ to_i)
@@ -103,7 +102,7 @@ def perform #User menu
   end
 end
 
-main
+perform
 # End of Program's name
 #.............................................................................
 #.............................................................................
