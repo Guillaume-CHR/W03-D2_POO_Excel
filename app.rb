@@ -21,9 +21,10 @@
 #
 #****************************************************************************
 def main # Create an instance of class 'Scrapper' with attribute array_town
-  url = "http://annuaire-des-mairies.com/val-d-oise.html"
-  scrapper = Scrapper.new(url)
-  array_to_record = scrapper.array_town
+puts page_mairie = Scrapper.new("http://annuaire-des-mairies.com/haute-garonne.html")
+puts page_mairie1 = Scrapper.new("http://annuaire-des-mairies.com/haute-garonne-2.html")
+puts page_mairie2 = Scrapper.new("http://annuaire-des-mairies.com/haute-garonne-3.html")
+
 end 
 
 def save_as_JSON #Record email using format to_json (~ to_i)
@@ -102,7 +103,7 @@ def perform #User menu
   end
 end
 
-perform
+main
 # End of Program's name
 #.............................................................................
 #.............................................................................
